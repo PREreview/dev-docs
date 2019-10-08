@@ -14,9 +14,9 @@
   - [Database](#database)
     - [Overview](#overview)
     - [Connecting to the live database](#connecting-to-the-live-database)
-    - [Init](#init)
-    - [Seed](#seed)
-    - [Migrations](#migrations)
+    - [DB: Init](#db-init)
+    - [DB: Seed](#db-seed)
+    - [DB: Migrations](#db-migrations)
   - [User auth - ORCID integration](#user-auth---orcid-integration)
   - [getpreprints](#getpreprints)
 
@@ -59,7 +59,7 @@ npm run stop
 
 #### Renew the TLS certificate
 
-**Note: This is run automatically using a cron job. You shoud not need to run it manually under normal circumstances, but it's documented here in case it's needed.**
+> 📝 Note: This is run automatically using a cron job. You shoud not need to run it manually under normal circumstances, but it's documented here in case it's needed.
 
 This only performs the hooks and renewal action if the certificate is close to expiry, so it can be run any time (e.g. during the daily update window).
 
@@ -100,17 +100,17 @@ To work with the live database you must:
 - have installed the CA certificate (available from [the overview tab](https://cloud.digitalocean.com/databases/prereview-postgres-db-alpha) for the database on Digitalocean)
 - add your IP address to the 'trusted sources' list on the Digitaloccean [db overview page](https://cloud.digitalocean.com/databases/prereview-postgres-db-alpha)
 
-**Warning: You should not connect to the live DB manually - use the scripts**
+> ⚠️ Warning: You should not connect to the live DB manually - use the scripts ⚠️
 
-### Init
+### DB: Init
 
 The [init script](https://github.com/PREreview/prereview-standup/blob/master/scripts/initdb.js) (re-)creates [the database tables](https://github.com/PREreview/prereview-standup/tree/master/server/db/tables) from the schemas in `server/db/tables/*/schema.js`.
 
-**Warning: Running the init script drops all the tables if they already exist**
+> ⚠️ Warning: Running the init script drops all the tables if they already exist ⚠️
 
 The scripts are run with `npm run initdb:dev` or `npm run initdb:prod`.
 
-### Seed
+### DB: Seed
 
 Populates the preprint table with data from getpreprints.
 
@@ -119,9 +119,9 @@ Seeding the database is a two-step process:
 1. Run getpreprints to create a local hyperdb (`~/.getpreprints/data/database`) containing all the aggregated and cleaned metadata
 2. Run `npm run initdb:dev` or `npm run initdeb:prod` to stream the data from the local hyperdb to the PREreview database
 
-### Migrations
+### DB: Migrations
 
-If you need to change something about the database structure, use Knex migrations.
+If you need to change the database structure, use Knex migrations.
 
 The process is:
 
@@ -131,7 +131,7 @@ The process is:
 
 You can roll back the last migration with `./node_modules/.bin/knex:down`
 
-It's important to keep the migrations directory intact as it maps to the migrations table in the database.
+> 📝 Note: It's important to keep the migrations directory intact as it maps to the migrations table in the database. The migrations directory is `.gitignore`d, to prevent setup and exploratory migrations from creeping into the codebase. This means that if you create production migrations you **must** manually commit and push them. 
 
 ## User auth - ORCID integration
 
