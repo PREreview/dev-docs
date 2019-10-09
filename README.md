@@ -162,3 +162,5 @@ To make changes to the documentation:
 1. Clone the `documentation` repo alongside the `prereview-standup` repo and install it (`cd documentation && npm install`)
 2. cd into the `prereview-standup` repo
 3. Run the `makedocs` script (`npm run makedocs`) which will rebuild the documentation and compile it into the site.
+4. Commit and push the updated compiled docs in `prereview-standup` (the updated file is `client/stores/docs.json`)
+5. Deploy the changes on the server (`npm run stop && git pull && npm run start`)
