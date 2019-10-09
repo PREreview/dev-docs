@@ -1,5 +1,7 @@
 # PREreview v2 developer documentation
 
+This repo contains any documentation that should not live in public repositories.
+
 - [PREreview v2 developer documentation](#prereview-v2-developer-documentation)
   - [Service providers](#service-providers)
   - [🖥️ Servers 🖥️](#%f0%9f%96%a5%ef%b8%8f-servers-%f0%9f%96%a5%ef%b8%8f)
@@ -19,6 +21,7 @@
     - [DB: Migrations](#db-migrations)
   - [User auth - ORCID integration](#user-auth---orcid-integration)
   - [getpreprints](#getpreprints)
+  - [Site static content (resources, CoC etc)](#site-static-content-resources-coc-etc)
 
 ## Service providers
 
@@ -26,6 +29,8 @@
 - ORCID for user authentication
 - Mailgun for mail
 - Lastpass for secrets (e.g. API client IDs and keys)
+
+Speak to @jhand if you think you should have access to something.
 
 ## 🖥️ Servers 🖥️
 
@@ -147,3 +152,13 @@ The [server components](https://github.com/PREreview/prereview-standup/tree/mast
 The data is seeded using getpreprints, which extracts from archival dumps of Crossref, EuropePMC and ArXiv as well as syncing the most recent entries from these three providers.
 
 To populate a db from dumps, you must download the dumps using getpreprints, then run one or more of the import scripts in `getpreprints/scripts/import` to populate the local hyperdb in `~/.getpreprints/data/database`. Once this is done, you can run the [seed scripts](#seed).
+
+## Site static content (resources, CoC etc)
+
+The PREreview platform's static content lives at https://github.com/PREreview/documentation.
+
+To make changes to the documentation:
+
+1. Clone the `documentation` repo alongside the `prereview-standup` repo and install it (`cd documentation && npm install`)
+2. cd into the `prereview-standup` repo
+3. Run the `makedocs` script (`npm run makedocs`) which will rebuild the documentation and compile it into the site.
