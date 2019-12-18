@@ -136,7 +136,7 @@ The process is:
 
 You can roll back the last migration with `./node_modules/.bin/knex:down`
 
-> 📝 Note: It's important to keep the migrations directory intact as it maps to the migrations table in the database. The migrations directory is `.gitignore`d, to prevent setup and exploratory migrations from creeping into the codebase. This means that if you create production migrations you **must** manually commit and push them. 
+> 📝 Note: It's important to keep the migrations directory intact as it maps to the migrations table in the database. The migrations directory is `.gitignore`d, to prevent setup and exploratory migrations from creeping into the codebase. This means that if you create production migrations you **must** manually commit and push them.
 
 ## User auth - ORCID integration
 
@@ -163,4 +163,4 @@ To make changes to the documentation:
 2. cd into the `prereview-standup` repo
 3. Run the `makedocs` script (`npm run makedocs`) which will rebuild the documentation and compile it into the site.
 4. Commit and push the updated compiled docs in `prereview-standup` (the updated file is `client/stores/docs.json`)
-5. Deploy the changes on the server (`npm run stop && git pull && npm run start`)
+5. Deploy the changes on the server (`pm2 stop 0 && git pull && pm2 start 0`)
